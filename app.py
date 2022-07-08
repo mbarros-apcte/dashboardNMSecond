@@ -153,7 +153,7 @@ def index():
     print("MB :: In index.")
 
 if __name__ == '__main__':
-    server.run_server(host='0.0.0.0')
+    server.run(host="0.0.0.0")  #it does not seem to be working if not host="0.0.0.0"
 
 
 # a =  [{'curveNumber': 1, 'pointNumber': 770, 'pointIndex': 770, 'lon': -80.1224, 'lat': 25.92242, 'marker.color': 1, 'bbox': {'x0': 2080.2519817769594, 'x1': 2082.2519817769594, 'y0': 477.6836927609566, 'y1': 479.6836927609566}, 'customdata': [3993, 'Bayview Dr & Collins Av', 7, 1, 23, 'SCOOT', 'D170', '552 Signal Control Cabinet', 'State', 'ATMS', 'Existing', 'Sunny Isles Beach', 25.92242, -80.1224, 'SCOOT', 'NO SCOOT', 'NO SCOOT', 0, 'darkgreen']}]
