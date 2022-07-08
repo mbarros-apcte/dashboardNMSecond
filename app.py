@@ -90,8 +90,13 @@ sidebar, central_map, dashboard = design_layout_components(prec_data)
 #app.layout = html.Div(children=[central_map, dashboard])
 app.layout =  dbc.Col(
     [
-        dbc.Row(central_map,style={"height":'60%'}),
-       dashboard],style={"height":'100vh'})
+        dbc.Row(
+            central_map,
+            style={
+                "height":'60%'
+            }),
+        dashboard
+    ],style={"height":'100vh'})
 
 
 import plotly.graph_objects as go
