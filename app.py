@@ -9,6 +9,7 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 import os
 import pickle
+from flask import Flask
 
 from cmps_dash_lyt.layout_comp_central_map import get_central_map
 from cmps_dash_lyt.layout_comp_dashboard import get_dashboard_layout
@@ -63,9 +64,17 @@ def design_layout_components(prec_data):
 
 
 
+server = Flask(__name__)
 
-app = dash.Dash(__name__)
-server = app.server
+# app = dash.Dash(__name__)
+# server = app.server
+
+app = dash.Dash(
+    __name__,
+    server=server,
+    external_stylesheets=[dbc.themes.BOOTSTRAP],
+    url_base_pathname = '/'
+)
 
 
 
@@ -99,6 +108,8 @@ def _get_asset_num(lst_asts):
     Output('dash_fig1', 'figure'),
     [Input('main_fig', 'selectedData')])
 def update_graph_1(sel_fig):
+    if sel_fig == None:
+        return _get_asset_num([])
 
     assets = _get_asset_num(sel_fig["points"])
     assets.sort()
@@ -123,6 +134,8 @@ def update_graph_1(sel_fig):
 @app.callback(
     Output('dash_fig2', 'figure'),Input('main_fig', 'clickData'))
 def update_graph_2(sel_fig):
+    if sel_fig == None:
+        return get_mock_fig_tt_comparison()
     asset = sel_fig["points"][0]['customdata'][0]
     print(asset)
     fig = get_mock_fig_tt_comparison(asset=asset)
@@ -130,8 +143,12 @@ def update_graph_2(sel_fig):
         print(key, ': fig 2', value)
     return fig
 
+@server.route("/")
+def index():
+    print("MB :: In index.")
+
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0')
+    server.run_server(host='0.0.0.0')
 
 
 # a =  [{'curveNumber': 1, 'pointNumber': 770, 'pointIndex': 770, 'lon': -80.1224, 'lat': 25.92242, 'marker.color': 1, 'bbox': {'x0': 2080.2519817769594, 'x1': 2082.2519817769594, 'y0': 477.6836927609566, 'y1': 479.6836927609566}, 'customdata': [3993, 'Bayview Dr & Collins Av', 7, 1, 23, 'SCOOT', 'D170', '552 Signal Control Cabinet', 'State', 'ATMS', 'Existing', 'Sunny Isles Beach', 25.92242, -80.1224, 'SCOOT', 'NO SCOOT', 'NO SCOOT', 0, 'darkgreen']}]
