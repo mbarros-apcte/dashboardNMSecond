@@ -38,3 +38,6 @@ Make sure you have variable app running with port '0.0.0.0' in your `app.py` fil
 
 ```python
 server.run(host="0.0.0.0") 
+```
+
+Tentative [website] (https://dashboardnmsecond.azurewebsites.net/)
