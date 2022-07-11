@@ -31,22 +31,24 @@ def get_placeholder_for_precomputed_score_fig():
 	return res
 
 def get_dashboard_layout(prec_data):
-	dashboard = html.Div([
-		dcc.Graph(
-			id='dash_fig1',
-			figure={},
-			style={
-				'display': 'inline-block',
-				'background-color': '#f8f9fa'
-			}
+	dashboard = dbc.Row([
+		dbc.Col(
+			dcc.Graph(
+				id='dash_fig1',
+				figure={},
+				style={
+					'background-color': '#f8f9fa'
+				}
+			)
 		),
-		dcc.Graph(
-			id='dash_fig2',
-			figure={},
-			style={
-				'display': 'inline-block',
-				'background-color': '#f8f9fa'
-			}
+		dbc.Col(
+			dcc.Graph(
+				id='dash_fig2',
+				figure={},
+				style={
+					'background-color': '#f8f9fa'
+				}
+			)
 		)	
 	])
 	return dashboard
